@@ -1,0 +1,88 @@
+﻿@using SAMAirline.Model.Models
+@model PaginationModel
+@{
+    int number = 0;
+    var bookings = Model.BookingList.Data;
+    int pagesCount = Model.BookingList.PagesCount;
+    int rowsCount = Model.BookingList.RowsCount;
+}
+
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugAdminBookingsButtons" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < pagesCount; i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncAdminPugBookings(@i, @pagesCount)" id="page_btn" style="margin-left:5px" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}
+<h3 style="text-align:center">Bookings</h3>
+@if (rowsCount > 0)
+{
+    <table class="table table-hover animated animatedFadeInUp fadeInUp">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Owner</th>
+                <th scope="col">Flight</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Nationality</th>
+                <th scope="col">Birthdate</th>
+                <th scope="col">Passport</th>
+                <th scope="col">Expire</th>
+                <th scope="col">BookingDateTime</th>
+                <th scope="col">ContactPhoneNumber</th>
+                <th scope="col">ContactEmail</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var b in bookings)
+            {
+                <tr id="@b.BookingId">
+                    <td>@b.BookingId</td>
+                    <td>@b.OwnerId</td>
+                    <td>@b.FlightId</td>
+                    <td>@b.PassengerName</td>
+                    <td>@b.PassengerSurname</td>
+                    <td>@b.PassengerNationality</td>
+                    <td>@b.PassengerBirthdate</td>
+                    <td>@b.PassengerPassport</td>
+                    <td>@b.PassportExpire</td>
+                    <td>@b.BookingDateTime</td>
+                    <td>@b.ContactPhoneNumber</td>
+                    <td>
+                        <a href="mailto:@b.ContactEmail" target="_blank" role="button">
+                            <i class="fa fa-envelope ml-2"></i> @b.ContactEmail.Substring(0, 5)...
+                        </a>
+                    </td>
+                    <td>
+                        <a onclick="DeleteBooking(@b.BookingId);">Delete booking</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div style="margin: auto; width: max-content;">There are no bookings</div>
+}
+
+<script>
+    function DeleteBooking(bookingId) {
+        $('.preloader').show();
+        $.ajax({
+            type: "GET",
+            url: '/Admin/DeleteBooking?bookingId=' + bookingId,
+            success: function (data) {
+                $("#themes-container").addClass('fade active show');
+                document.getElementById(bookingId).remove();
+                $('.preloader').fadeOut();
+            }
+        });
+    }
+</script>

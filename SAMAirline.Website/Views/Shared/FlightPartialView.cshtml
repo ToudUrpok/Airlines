@@ -1,0 +1,204 @@
+﻿@using SAMAirline.Model.ModelsDto
+@model SAMAirline.Model.PaginationModels.FlightPaginationModel
+@{
+    int pageNumber = Model.FlightList.PageNumber;
+    int pagesCount = Model.FlightList.PagesCount;
+}
+
+<br />
+@if (@Model.NoResult == true)
+{
+    <div style="margin: auto;width: max-content;font-size: 22px;height: 15px;margin-top: 30px;margin-bottom: 20px;">@Resources.Resource.NoFlightsFound</div>
+}
+else if (pagesCount >= 0)
+{
+    if (!Model.IsTwoWay)
+    {
+        foreach (var f in Model.FlightList.Data)
+        {
+            <div class="card">
+                <div class="card-header font-weight-bold" style="background-color:#33b5e5!important; color: white">
+                    <span>@f.AirlineCode - @f.AirlineName</span>
+                </div>
+                <div class="card-body">
+                    <div class="media d-block d-md-flex mt-3">
+                        <div class="col-md-8 media-body text-center text-md-left ml-0">
+                            <div class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-bottom:none">
+                                <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@f.AircraftName</h6></div>
+                                <div class="col-md-4" style="padding:0; text-align:center"></div>
+                                <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@f.FlightNumber</h6></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <div class="col-md-3" style="padding:0; text-align:left"><h2 class="my-0">@f.DepartureDateTime.ToString("HH:mm") </h2></div>
+                                <div class="col-md-6" style="padding:0; text-align:center; margin-top: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-2" style="padding:0;"><i class="fas fa-plane-departure" style="font-size:0.9rem"></i></div>
+                                        <div class="col-md-8" style="padding:0;"><hr style="border-bottom: 1.5px dashed;margin-top: 8px;"></div>
+                                        <div class="col-md-2" style="padding:0;"><i class="fas fa-plane-arrival" style="font-size:0.9rem"></i></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="padding:0; text-align:right"><h2 class="my-0"> @f.ArrivalDateTime.ToString("HH:mm")</h2></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-top:none; padding-top:0;padding-bottom: 0;">
+                                <div class="col-md-3" style="padding:0; text-align:left"><h6 class="my-0">@f.DepartureDateTime.ToString("dd MMMM yyyy")</h6></div>
+                                <div class="col-md-6" style="padding:0; text-align:center"></div>
+                                <div class="col-md-3" style="padding:0; text-align:right"><h6 class="my-0">@f.ArrivalDateTime.ToString("dd MMMM yyyy")</h6></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-top:none; padding-top:0;">
+                                <div class="col-md-2" style="padding:0; text-align:left"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="right" title="@f.DepAirportName, @f.DepartureCity, @f.DepartureCountry"><h6 class="my-0">@f.DepAirportCode</h6></a></div>
+                                <div class="col-md-8" style="padding:0; text-align:center"></div>
+                                <div class="col-md-2" style="padding:0; text-align:right"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="left" title="@f.ArrAirportName, @f.ArrivalCity, @f.ArrivalCountry"><h6 class="my-0">@f.ArrAirportCode</h6></a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex mb-3 mx-auto list-group">
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <h5 class="mt-0 font-weight-bold text-right">
+                                    Free places: @f.FreePlaces
+                                </h5>
+                            </div>
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <h6 class="mt-0 text-right">
+                                    
+                                    @(f.Stops == 0 ? "Direct" : $"Stops: {@f.Stops}")
+                                </h6>
+                            </div>
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <a href="/Booking/NewBooking?flightId=@f.FlightId&secondFlightId=0&amount=@Model.Count" onclick="ShowLoader();"  class="btn btn-primary btn-lg">@Resources.Resource.MakeBooking $@f.DisplayPrice </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5">
+        }
+    }
+    else
+    {
+        foreach (var f in Model.TwoWayFlightList.Data)
+        {
+            <div class="card">
+                @if (f.FirstFlight.AirlineCode == f.SecondFlight.AirlineCode)
+                {
+                    <div class="card-header font-weight-bold" style="background-color:#33b5e5!important; color: white">
+                        <span>@f.FirstFlight.AirlineCode - @f.FirstFlight.AirlineName</span>
+                    </div>
+                }
+                else
+                {
+                    <div class="card-header font-weight-bold" style="background-color:#33b5e5!important; color: white">
+                        <span>
+                            <a data-toggle="tooltip" data-placement="bottom" title="@f.FirstFlight.AirlineName">@f.FirstFlight.AirlineCode</a> ,
+                            <a data-toggle="tooltip" data-placement="bottom" title="@f.SecondFlight.AirlineName">@f.SecondFlight.AirlineCode</a>
+                        </span>
+                    </div>
+                }
+                <div class="card-body">
+                    <div class="media d-block d-md-flex mt-3">
+
+                        <div class="col-md-8 media-body text-center text-md-left ml-0">
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-bottom:none">
+                                <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@f.FirstFlight.AircraftName</h6></div>
+                                <div class="col-md-4" style="padding:0; text-align:center"></div>
+                                <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@f.FirstFlight.FlightNumber</h6></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <div class="col-md-3" style="padding:0; text-align:left"><h2 class="my-0">@f.FirstFlight.DepartureDateTime.ToString("HH:mm")</h2></div>
+                                <div class="col-md-6" style="padding:0; text-align:center; margin-top: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-2" style="padding:0;"><i class="fas fa-plane-departure" style="font-size:0.9rem"></i></div>
+                                        <div class="col-md-8" style="padding:0;"><hr style="border-bottom: 1.5px dashed;margin-top: 8px;"></div>
+                                        <div class="col-md-2" style="padding:0;"><i class="fas fa-plane-arrival" style="font-size:0.9rem"></i></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="padding:0; text-align:right"><h2 class="my-0">@f.FirstFlight.ArrivalDateTime.ToString("HH:mm")</h2></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-top:0;padding-bottom: 0;">
+                                <div class="col-md-3" style="padding:0; text-align:left"><h6 class="my-0">@f.FirstFlight.DepartureDateTime.ToString("dd MMMM yyyy")</h6></div>
+                                <div class="col-md-6" style="padding:0; text-align:center"></div>
+                                <div class="col-md-3" style="padding:0; text-align:right"><h6 class="my-0">@f.FirstFlight.ArrivalDateTime.ToString("dd MMMM yyyy")</h6></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-top:0;">
+                                <div class="col-md-2" style="padding:0; text-align:left"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="right" title="@f.FirstFlight.DepAirportName, @f.FirstFlight.DepartureCity, @f.FirstFlight.DepartureCountry"><h6 class="my-0">@f.FirstFlight.DepAirportCode</h6></a></div>
+                                <div class="col-md-8" style="padding:0; text-align:center"></div>
+                                <div class="col-md-2" style="padding:0; text-align:right"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="left" title="@f.FirstFlight.ArrAirportName, @f.FirstFlight.ArrivalCity, @f.FirstFlight.ArrivalCountry"><h6 class="my-0">@f.FirstFlight.ArrAirportCode</h6></a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex mb-3 mx-auto list-group">
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <h5 class="mt-0 font-weight-bold text-right">
+                                    Free places: @f.FirstFlight.FreePlaces
+                                </h5>
+                            </div>
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <h6 class="mt-0 text-right">
+                                    Stops: @f.FirstFlight.Stops
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="media d-block d-md-flex mt-3">
+                        <div class="col-md-8 media-body text-center text-md-left ml-0">
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-bottom:none">
+                                <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@f.SecondFlight.AircraftName</h6></div>
+                                <div class="col-md-4" style="padding:0; text-align:center"></div>
+                                <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@f.SecondFlight.FlightNumber</h6></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <div class="col-md-3" style="padding:0; text-align:left"><h2 class="my-0">@f.SecondFlight.DepartureDateTime.ToString("HH:mm")</h2></div>
+                                <div class="col-md-6" style="padding:0; text-align:center; margin-top: 10px;">
+                                    <div class="row">
+                                        <div class="col-md-2" style="padding:0;"><i class="fas fa-plane-departure" style="font-size:0.9rem"></i></div>
+                                        <div class="col-md-8" style="padding:0;"><hr style="border-bottom: 1.5px dashed;margin-top: 8px;"></div>
+                                        <div class="col-md-2" style="padding:0;"><i class="fas fa-plane-arrival" style="font-size:0.9rem"></i></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3" style="padding:0; text-align:right"><h2 class="my-0">@f.SecondFlight.ArrivalDateTime.ToString("HH:mm")</h2></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-top:0;padding-bottom: 0;">
+                                <div class="col-md-3" style="padding:0; text-align:left"><h6 class="my-0">@f.SecondFlight.DepartureDateTime.ToString("dd MMMM yyyy")</h6></div>
+                                <div class="col-md-6" style="padding:0; text-align:center"></div>
+                                <div class="col-md-3" style="padding:0; text-align:right"><h6 class="my-0">@f.SecondFlight.ArrivalDateTime.ToString("dd MMMM yyyy")</h6></div>
+                            </div>
+                            <div class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-top:0;">
+                                <div class="col-md-2" style="padding:0; text-align:left"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="right" title="@f.SecondFlight.DepAirportName, @f.SecondFlight.DepartureCity, @f.SecondFlight.DepartureCountry"><h6 class="my-0">@f.SecondFlight.DepAirportCode</h6></a></div>
+                                <div class="col-md-8" style="padding:0; text-align:center"></div>
+                                <div class="col-md-2" style="padding:0; text-align:right"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="left" title="@f.SecondFlight.ArrAirportName, @f.SecondFlight.ArrivalCity, @f.SecondFlight.ArrivalCountry"><h6 class="my-0">@f.SecondFlight.ArrAirportCode</h6></a></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 d-flex mb-3 mx-auto list-group">
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <h5 class="mt-0 font-weight-bold text-right">
+                                    Free places: @f.SecondFlight.FreePlaces
+                                </h5>
+                            </div>
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <h6 class="mt-0 text-right">
+                                    Stops: @f.SecondFlight.Stops
+                                </h6>
+                            </div>
+                            <div class="d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                                <a href="/Booking/NewBooking?flightId=@f.FirstFlight.FlightId&secondFlightId=@f.SecondFlight.FlightId&amount=@Model.Count" onclick="ShowLoader();"  class="btn btn-primary btn-lg">@Resources.Resource.MakeBooking $@f.FirstFlight.DisplayPrice </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-5">
+        }
+    }
+}
+@if (pageNumber < pagesCount)
+{
+
+    <div class="d-flex justify-content-center card-body">
+        <button onclick="GetFlights(@pageNumber + 1); return false;" style="margin-top: 10px;" class="btn btn-info waves-effect">@Resources.Resource.ShowMore</button>
+    </div>
+}
+
+<script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

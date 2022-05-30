@@ -1,0 +1,109 @@
+﻿@using SAMAirline.Model.Models
+@model SAMAirline.Model.Models.PaginationModel
+@{
+    ViewBag.Title = Resources.Resource.AdminPanel;
+}
+<main style="min-height:1000px;margin-top:150px;">
+    <div class="container wow fadeIn" style="max-width: 1440px!important;">
+        <div class="row">
+            <div class="col-2">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a id="mainLink" class="nav-link" data-toggle="tab" href="#flights">Flights</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="mainLink" class="nav-link" data-toggle="tab" href="#passengers">Passengers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="mainLink" class="nav-link" data-toggle="tab" href="#bookings">Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="mainLink" class="nav-link" data-toggle="tab" href="#actions">Actions</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-10">
+                <div class="tab-content animated animatedFadeInUp fadeInUp">
+                    <div id="flights" class="container tab-pane active">
+                        <ul class="nav nav-tabs nav-justified">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#all">Flights</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#new">New flight</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="all" class="tab-pane in active" style="margin-top:10px">
+                                <div id="flights-container">
+                                    @{ Html.RenderAction("Flights"); }
+                                </div>
+                            </div>
+                            <div id="new" class="tab-pane ">
+                                @{ Html.RenderAction("NewFlight"); }
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="passengers" class="container tab-pane fade">
+                        <div id="passengers-container">
+                            @{ Html.RenderAction("Passengers"); }
+                        </div>
+                    </div>
+
+                    <div id="bookings" class="container tab-pane fade">
+                        <div id="bookings-container">
+                            @{ Html.RenderAction("Bookings"); }
+                        </div>
+                    </div>
+
+                    <div id="actions" class="container tab-pane fade">
+                        <button onclick="SendNotificationsAsync('/Admin/SendNotificationsAsync')" type="button" id="btn-one" class="btn btn-indigo">Send Notifications</button>
+                        @*<button onclick="SaveJsonAsync('/Admin/SaveJson')" type="button" id="btn-two" class="btn btn-amber">Save Json</button>*@
+                        <button onclick="AddFlightsAsync('/Admin/AddFlights')" type="button" id="btn-three" class="btn btn-cyan">Add Flights</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+</main>
+<script>
+    function SendNotificationsAsync(route) {
+        $('#btn-one').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Sending...').addClass('disabled');
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function () {
+                $('#btn-one').html('Send Notifications').removeClass('disabled');
+            }
+        });
+    }
+    function SaveJsonAsync(route) {
+        $('#btn-two').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Loading...').addClass('disabled');
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function () {
+                $('#btn-two').html('Save Json').removeClass('disabled');
+            }
+        });
+    }
+    function AddFlightsAsync(route) {
+        $('#btn-three').html('<span class="spinner-border spinner-border-sm mr-2" role="status" aria-hidden="true"></span>Adding...').addClass('disabled');
+        $.ajax({
+            type: "GET",
+            url: route,
+            success: function () {
+                $('#btn-three').html('Add Flights').removeClass('disabled');
+            }
+        });
+    }
+
+    autocomplete(document.getElementById("AirlineInput"), airlines);
+    autocomplete(document.getElementById("AircraftInput"), aircrafts);
+    autocomplete(document.getElementById("FromInput"), airports);
+    autocomplete(document.getElementById("ToInput"), airports);
+
+</script>

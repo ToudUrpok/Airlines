@@ -1,0 +1,235 @@
+﻿@model SAMAirline.Model.Models.NewBookingViewModel
+
+
+<main style="min-height:1000px;margin-top:150px;">
+    <div class="container wow fadeIn">
+
+        <h2 class="my-5 h2 text-center">Booking form</h2>
+
+        <div class="row">
+            <form class="col-md-8 mb-4" action="NewBooking" method="post">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                <input name="FlightId" value="@Model.FlightId" hidden />
+                <input name="SecondFlightId" value="@Model.SecondFlightId" hidden />
+
+                @for (int i = 1; i <= Model.Amount; i++)
+                {
+                    <div class="card">
+                        <div class="card-body">
+                            @if (Model.Amount == 1)
+                            {
+                                <h3 class="my-5 h3 text-center" style="margin: 0px !important;">Passenger</h3>
+                            }
+                            else
+                            {
+                                <h3 class="my-5 h3 text-center" style="margin: 0px !important;">Passenger №@i</h3>
+                            }
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="md-form ">
+                                        @Html.EditorFor(x => Model.PassengerInfos[i - 1].PassengerName, new { htmlAttributes = new { @style = "text-transform: capitalize", @class = "form-control" } })
+                                        <label for="firstName" class="">@Resources.Resource.PassName</label>
+                                        @Html.ValidationMessageFor(x => Model.PassengerInfos[i].PassengerName, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="md-form">
+                                        @Html.EditorFor(x => Model.PassengerInfos[i - 1].PassengerSurname, new { htmlAttributes = new { @style = "text-transform: capitalize", @class = "form-control" } })
+                                        <label for="lastName" class="">@Resources.Resource.PassSurname</label>
+                                        @Html.ValidationMessageFor(x => Model.PassengerInfos[i].PassengerSurname, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="md-form">
+                                        @Html.EditorFor(x => Model.PassengerInfos[i - 1].PassengerBirthdate, new { htmlAttributes = new { @class = "form-control", @placeholder = "12/34/5678" } })
+                                        <label for="lastName" class="">@Resources.Resource.PassBirthdate</label>
+                                        @Html.ValidationMessageFor(x => Model.PassengerInfos[i].PassengerBirthdate, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="md-form">
+                                        @Html.EditorFor(x => Model.PassengerInfos[i - 1].PassengerNationality, new { htmlAttributes = new { @id = "nationality", @style = "text-transform: capitalize", @class = "form-control", @placeholder = "Country" } })
+                                        <label for="lastName" class="">@Resources.Resource.PassNationality</label>
+                                        @Html.ValidationMessageFor(x => Model.PassengerInfos[i].PassengerNationality, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-2">
+                                    <div class="md-form">
+                                        @Html.EditorFor(x => Model.PassengerInfos[i - 1].PassengerPassport, new { htmlAttributes = new { @class = "form-control", @placeholder = "AB1234567" } })
+                                        <label for="lastName" class="">@Resources.Resource.PassPassport</label>
+                                        @Html.ValidationMessageFor(x => Model.PassengerInfos[i].PassengerPassport, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-6 mb-2">
+                                    <div class="md-form">
+                                        @Html.EditorFor(x => Model.PassengerInfos[i - 1].PassportExpire, new { htmlAttributes = new { @class = "form-control", @placeholder = "12/34" } })
+                                        <label for="lastName" class="">@Resources.Resource.PassExpire</label>
+                                        @Html.ValidationMessageFor(x => Model.PassengerInfos[i].PassportExpire, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="my-5 h3 text-center" style="margin: 0px !important;">Contact information</h3>
+                        <div class="md-form mb-5">
+                            @Html.EditorFor(x => Model.ContactPhoneNumber, new { htmlAttributes = new { @class = "form-control", @placeholder = "7-12 digits" } })
+                            <label for="lastName" class="">@Resources.Resource.PhoneNumber</label>
+                            @Html.ValidationMessageFor(x => Model.ContactPhoneNumber, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="md-form mb-5">
+                            @Html.EditorFor(x => Model.ContactEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "youremail@example.com" } })
+                            <label for="lastName" class="">@Resources.Resource.Email</label>
+                            @Html.ValidationMessageFor(x => Model.ContactEmail, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="md-form mb-5">
+                            @Html.EditorFor(x => Model.ConfirmEmail, new { htmlAttributes = new { @class = "form-control", @placeholder = "youremail@example.com" } })
+                            <label for="lastName" class="">Confirm Email</label>
+                            @Html.ValidationMessageFor(x => Model.ConfirmEmail, "", new { @class = "text-danger" })
+                        </div>
+                        <button class="btn btn-primary btn-lg btn-block" type="submit">@Resources.Resource.MakeBooking <strong>$<strong id="totalPrice">@(Model.TotalPrice * 1.1)</strong></strong></button>
+                    </div>
+                </div>
+            </form>
+            <div class="col-md-4 mb-4" style="position: -webkit-sticky;position: sticky; top: 0; z-index:100;">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Flight</span>
+                    @if (Model.SecondFlight != null)
+                    {
+                        <span class="badge badge-secondary badge-pill">2</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-secondary badge-pill">1</span>
+                    }
+                </h4>
+                <ul class="list-group mb-3 z-depth-1">
+                    <li class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-bottom:none">
+                        <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@Model.Flight.AircraftName</h6></div>
+                        <div class="col-md-4" style="padding:0; text-align:center"></div>
+                        <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@Model.Flight.FlightNumber</h6></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                        <div class="col-md-3" style="padding:0; text-align:left"><h3 class="my-0">@Model.Flight.DepartureDateTime.ToString("HH:mm") </h3></div>
+                        <div class="col-md-6" style="padding:0; text-align:center; margin-top: 10px;">
+                            <div class="row">
+                                <div class="col-md-2" style="padding-right:0;"><i class="fas fa-plane-departure" style="font-size:0.9rem"></i></div>
+                                <div class="col-md-8" style="padding:0;"><hr style="border-bottom: 1.5px dashed;margin-top: 8px;"></div>
+                                <div class="col-md-2" style="padding-left:0;"><i class="fas fa-plane-arrival" style="font-size:0.9rem"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-md-3" style="padding:0; text-align:right"><h3 class="my-0"> @Model.Flight.ArrivalDateTime.ToString("HH:mm")</h3></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-top:none; padding-top:0;padding-bottom: 0;">
+                        <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@Model.Flight.DepartureDateTime.ToString("dd MMMM yyyy")</h6></div>
+                        <div class="col-md-4" style="padding:0; text-align:center"></div>
+                        <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@Model.Flight.ArrivalDateTime.ToString("dd MMMM yyyy")</h6></div>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-top:none; padding-top:0;">
+                        <div class="col-md-2" style="padding:0; text-align:left"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="right" title="@Model.Flight.DepAirportName, @Model.Flight.DepartureCity, @Model.Flight.DepartureCountry"><h6 class="my-0">@Model.Flight.DepAirportCode</h6></a></div>
+                        <div class="col-md-8" style="padding:0; text-align:center"></div>
+                        <div class="col-md-2" style="padding:0; text-align:right"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="left" title="@Model.Flight.ArrAirportName, @Model.Flight.ArrivalCity, @Model.Flight.ArrivalCountry"><h6 class="my-0">@Model.Flight.ArrAirportCode</h6></a></div>
+                    </li>
+                    @if (Model.SecondFlight != null)
+                    {
+                        <li class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-bottom:none">
+                            <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@Model.SecondFlight.AircraftName</h6></div>
+                            <div class="col-md-4" style="padding:0; text-align:center"></div>
+                            <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@Model.SecondFlight.FlightNumber</h6></div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none; padding-bottom:0; padding-top:0;">
+                            <div class="col-md-3" style="padding:0; text-align:left"><h3 class="my-0">@Model.SecondFlight.DepartureDateTime.ToString("HH:mm") </h3></div>
+                            <div class="col-md-6" style="padding:0; text-align:center; margin-top: 10px;">
+                                <div class="row">
+                                    <div class="col-md-2" style="padding-right:0;"><i class="fas fa-plane-departure" style="font-size:0.9rem"></i></div>
+                                    <div class="col-md-8" style="padding:0;"><hr style="border-bottom: 1.5px dashed;margin-top: 8px;"></div>
+                                    <div class="col-md-2" style="padding-left:0;"><i class="fas fa-plane-arrival" style="font-size:0.9rem"></i></div>
+                                </div>
+                            </div>
+                            <div class="col-md-3" style="padding:0; text-align:right"><h3 class="my-0"> @Model.SecondFlight.ArrivalDateTime.ToString("HH:mm")</h3></div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-top:none; padding-top:0;padding-bottom: 0;">
+                            <div class="col-md-4" style="padding:0; text-align:left"><h6 class="my-0">@Model.SecondFlight.DepartureDateTime.ToString("dd MMMM yyyy")</h6></div>
+                            <div class="col-md-4" style="padding:0; text-align:center"></div>
+                            <div class="col-md-4" style="padding:0; text-align:right"><h6 class="my-0">@Model.SecondFlight.ArrivalDateTime.ToString("dd MMMM yyyy")</h6></div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between lh-condensed grey-text" style="border-top:none; padding-top:0;">
+                            <div class="col-md-2" style="padding:0; text-align:left"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="right" title="@Model.SecondFlight.DepAirportName, @Model.SecondFlight.DepartureCity, @Model.SecondFlight.DepartureCountry"><h6 class="my-0">@Model.SecondFlight.DepAirportCode</h6></a></div>
+                            <div class="col-md-8" style="padding:0; text-align:center"></div>
+                            <div class="col-md-2" style="padding:0; text-align:right"><a style="color: #34b5e5;" data-toggle="tooltip" data-placement="left" title="@Model.SecondFlight.ArrAirportName, @Model.SecondFlight.ArrivalCity, @Model.SecondFlight.ArrivalCountry"><h6 class="my-0">@Model.SecondFlight.ArrAirportCode</h6></a></div>
+                        </li>
+                    }
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="border-bottom:none; padding-bottom:0;">
+                        <div>
+                            <h6 class="my-0">Passengers @Model.Amount</h6>
+                        </div>
+                        @if (Model.SecondFlight != null)
+                        {
+                            <span>$<span id="ticketsPrice">@((Model.Flight.Price + Model.SecondFlight.Price) * Model.Amount)</span></span>
+                        }
+                        else
+                        {
+                            <span>$<span id="ticketsPrice">@((Model.Flight.Price) * Model.Amount)</span></span>
+                        }
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed" style="border-top:none;">
+                        <div>
+                            <h6 class="my-0">Taxes</h6>
+                        </div>
+                        @if (Model.SecondFlight != null)
+                        {
+                            <span>$<span id="taxes">@((Model.Flight.Price + Model.SecondFlight.Price) * Model.Amount * 0.1)</span></span>
+                        }
+                        else
+                        {
+                            <span>$<span id="taxes">@((Model.Flight.Price) * Model.Amount * 0.1)</span></span>
+                        }
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between">
+                        <span>Total (USD)</span>
+                        <strong>$<strong id="totalPrice">@(Model.TotalPrice * 1.1)</strong></strong>
+                    </li>
+                </ul>
+                <!-- Cart -->
+                <!-- Promo code -->
+                <form class="card p-2">
+                    @*<div class="input-group">
+                            <input type="text" class="form-control" placeholder="Promo code" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                            <div class="input-group-append">
+                                <button class="btn btn-secondary btn-md waves-effect m-0" type="button">Use</button>
+                            </div>
+                        </div>*@
+                    <a href="/Flight/Index?backToList=true" class="btn btn-secondary btn-md btn-block" style="margin-bottom: 0;"><strong>Change search params</strong></a>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</main>
+<!--Grid row-->
+<script>
+    //$('.datepicker').datepicker({
+    //    inline: true
+    //});
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+
+    window.onload = function () {
+        $("#totalPrice").html(parseInt($("#ticketsPrice").html(), 10) + parseInt($("#taxes").html(), 10))
+    }
+
+    autocomplete(document.getElementById("nationality"), countries);
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

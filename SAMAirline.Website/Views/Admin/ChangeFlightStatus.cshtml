@@ -1,0 +1,36 @@
+﻿@model SAMAirline.Model.Models.FlightDelayModel
+@{
+    ViewData["Title"] = "ChangeFlightStatus";
+}
+<div class="view full-page-intro" style="background-image: url('/Style/img/background3.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row wow fadeIn white-text text-center justify-content-center">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                        @Html.EditorFor(model => model.FlightId, new { htmlAttributes = new { @type = "hidden", @class = "form-control" } })
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <label> Please enter delay (no more then 3) </label>
+                                @Html.DropDownList("DelayTime", new SelectList(new List<int>() { 1, 2, 3 }), new { @class = "custom-select d-block w-100" })
+                                @Html.ValidationMessageFor(model => model.DelayTime, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-md-12">
+                                <a class="btn btn-secondary" href="/Admin/Index">Back to List</a>
+                                <input type="submit" value="Change dep." class="btn btn-success" style="width: 165px;" />
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+

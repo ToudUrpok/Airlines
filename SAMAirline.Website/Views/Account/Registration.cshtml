@@ -1,0 +1,97 @@
+﻿@model SAMAirline.Model.Models.RegistrationViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="view full-page-intro" style="background-image: url('/Style/img/background4.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row wow fadeIn">
+                <div class="col-md-6 mb-4 white-text text-center text-md-left">
+                    <h1 class="display-4 font-weight-bold">Booking</h1>
+                    <hr class="hr-light">
+                    <p>
+                        <strong>@Resources.Resource.MainTitle</strong>
+                    </p>
+                    <p class="mb-4 d-none d-md-block">
+                        <strong>
+                            @Resources.Resource.DescriptionText
+                        </strong>
+                    </p>
+                    <a href="/Account/Login" class="btn btn-indigo btn-lg">
+                        @Resources.Resource.Login
+                        <i class="fas fa-sign-in-alt ml-2"></i>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-5 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            @using (Html.BeginForm("Registration", "Account", FormMethod.Post, new { role = "form" }))
+                            {
+                                @Html.AntiForgeryToken()
+
+                                <h3 class="dark-grey-text text-center">
+                                    <strong>@Resources.Resource.Registration:</strong>
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </h3>
+                                <hr>
+
+                                <div class="md-form">
+                                    <i class="fas fa-user prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label for="Name">@Resources.Resource.Name</label>
+                                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-user prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.Surname, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label for="Surname">@Resources.Resource.Surname</label>
+                                    @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-envelope prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label for="Email">@Resources.Resource.Email</label>
+                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-key prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label for="Password">@Resources.Resource.Password</label>
+                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="md-form">
+                                    <i class="fas fa-key prefix grey-text"></i>
+                                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                                    <label for="ConfirmPassword">@Resources.Resource.ConfirmPassword</label>
+                                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="text-center">
+                                    <button class="btn btn-indigo" type="submit">@Resources.Resource.Registration</button>
+                                </div>
+
+                                if (Model.Message != null)
+                                {
+                                    <div class="text-center">
+                                        <hr>
+                                        <h6 style="text-align:center;color:red">@Resources.Resource.RegError</h6>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

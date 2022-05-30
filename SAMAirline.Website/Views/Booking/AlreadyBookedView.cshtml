@@ -1,0 +1,14 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="view full-page-intro" style="background-image: url('/Style/img/background3.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+        <div class="container text-white">
+            <h2 class="my-5 h2 text-center">
+                You have already booked tickets for this flight, you can book only @ViewBag.Count tickets more <a href="/Flight/Index?backToList=true">on the search page</a>
+                or cancel actual bookings on the <a href="/Booking/Index">bookings page</a>
+            </h2>
+        </div>
+    </div>
+</div>

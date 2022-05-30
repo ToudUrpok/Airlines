@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SAMAirline.Logic.Services.AircraftService" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAIABAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\AircraftService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.242" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.AirlineService" BaseTypeListCollapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAgAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\AirlineService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.AirportService" BaseTypeListCollapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAAAAAABAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Services\AirportService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.BookingService" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAAABIIAAABAAAGAEAAAAEQIAAAQAhAQBAAAAIA=</HashCode>
+      <FileName>Services\BookingService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.152" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.CommitService" BaseTypeListCollapsed="true">
+    <Position X="7.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Services\CommitService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.EmailService">
+    <Position X="9.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Services\EmailService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.FlightService" BaseTypeListCollapsed="true">
+    <Position X="11" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAABAAABABAABEAAAIAAAAAAQAwAAABAAAKA=</HashCode>
+      <FileName>Services\FlightService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.NotificationService" BaseTypeListCollapsed="true">
+    <Position X="14.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IEABAQAACAIAAABAAAAAAAAAAAAAAAAAAAGAAAAEAAA=</HashCode>
+      <FileName>Services\NotificationService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="SAMAirline.Logic.Services.PassengerService" BaseTypeListCollapsed="true">
+    <Position X="12.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAAAAADAAAgABAAAABEAAACAGAAYAQAgAQAAAEIIA=</HashCode>
+      <FileName>Services\PassengerService.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="SAMAirline.Logic.Interfaces.IPassengerService">
+    <Position X="12.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAABAAAgAAAAAAAEAAACAGAAYAQAgAQAAAEIIA=</HashCode>
+      <FileName>Interfaces\IPassengerService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.INotificationService">
+    <Position X="14.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAAAAEAAA=</HashCode>
+      <FileName>Interfaces\INotificationService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.IFlightService">
+    <Position X="11" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAABAAAAABAAAEAAAIAAAAAAQAwAAABAAAKA=</HashCode>
+      <FileName>Interfaces\IFlightService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.IEmailService">
+    <Position X="9.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IEmailService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.ICommitService">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICommitService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.IBookingService">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAEAAAABIAAAAAAAAEAEAAAAAQIAAAQAhAABAAAAIA=</HashCode>
+      <FileName>Interfaces\IBookingService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.IAirportService">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAirportService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.IAirlineService">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAirlineService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="SAMAirline.Logic.Interfaces.IAircraftService">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IAircraftService.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

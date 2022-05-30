@@ -1,0 +1,483 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlreadyBooked" xml:space="preserve">
+    <value>You already have a booking on this flight</value>
+  </data>
+  <data name="ArrCityRequired" xml:space="preserve">
+    <value>Arrival city not specified</value>
+  </data>
+  <data name="ArrivalCity" xml:space="preserve">
+    <value>Arrival city</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="BackToBookings" xml:space="preserve">
+    <value>Back to bookings</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to list</value>
+  </data>
+  <data name="BuyTicket" xml:space="preserve">
+    <value>Buy ticket</value>
+  </data>
+  <data name="CancelBooking" xml:space="preserve">
+    <value>Cancel booking</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Card number</value>
+  </data>
+  <data name="CardRequired" xml:space="preserve">
+    <value>Card number not specified</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChooseAmount" xml:space="preserve">
+    <value>Choose amount</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Choose language</value>
+  </data>
+  <data name="ChoosePhoto" xml:space="preserve">
+    <value>Choose photo</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Confirm password</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Contact Info</value>
+  </data>
+  <data name="ContactInfoText" xml:space="preserve">
+    <value>Our support available to help you 24 hours a day.</value>
+  </data>
+  <data name="CorrectAmount" xml:space="preserve">
+    <value>Please choose amount (no more then 5)</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DepartingAt" xml:space="preserve">
+    <value>Departing at</value>
+  </data>
+  <data name="DepartingCity" xml:space="preserve">
+    <value>Departing city</value>
+  </data>
+  <data name="DepCityRequired" xml:space="preserve">
+    <value>Departure city not specified</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DescriptionText" xml:space="preserve">
+    <value>This web application is intended for booking and buying tickets for flights from anywhere in the world.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Email not specified</value>
+  </data>
+  <data name="EnterCardNumber" xml:space="preserve">
+    <value>Enter card number, 16 digits</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Enter name</value>
+  </data>
+  <data name="EnterSurname" xml:space="preserve">
+    <value>Enter surname</value>
+  </data>
+  <data name="FlyingFrom" xml:space="preserve">
+    <value>From</value>
+  </data>
+  <data name="FlyingTo" xml:space="preserve">
+    <value>To</value>
+  </data>
+  <data name="IncorrectAmount" xml:space="preserve">
+    <value>Please choose from 1 to 5 places</value>
+  </data>
+  <data name="IncorrectArrivalCity" xml:space="preserve">
+    <value>Incorrect arrival city</value>
+  </data>
+  <data name="IncorrectCardNumber" xml:space="preserve">
+    <value>Incorrect card number, enter 16 characters</value>
+  </data>
+  <data name="IncorrectDelay" xml:space="preserve">
+    <value>Incorrect delay time, choose from 1 to 3 hours</value>
+  </data>
+  <data name="IncorrectDepartureCity" xml:space="preserve">
+    <value>Incorrect departure city</value>
+  </data>
+  <data name="IncorrectEmail" xml:space="preserve">
+    <value>Incorrect email</value>
+  </data>
+  <data name="IncorrectFlightNumber" xml:space="preserve">
+    <value>Incorrect flight number</value>
+  </data>
+  <data name="IncorrectName" xml:space="preserve">
+    <value>Incorrect name</value>
+  </data>
+  <data name="IncorrectPassport" xml:space="preserve">
+    <value>Incorrect passport number</value>
+  </data>
+  <data name="IncorrectPlaces" xml:space="preserve">
+    <value>Incorrect count of places</value>
+  </data>
+  <data name="IncorrectPrice" xml:space="preserve">
+    <value>Incorrect price</value>
+  </data>
+  <data name="IncorrectSurname" xml:space="preserve">
+    <value>Incorrect surname</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>left</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MainTitle" xml:space="preserve">
+    <value>Welcome to the best airline company service for booking places for flights!</value>
+  </data>
+  <data name="MakeBooking" xml:space="preserve">
+    <value>Book for</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Name not specified</value>
+  </data>
+  <data name="NewBooking" xml:space="preserve">
+    <value>Book now</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NoBookings" xml:space="preserve">
+    <value>You have no active bookings</value>
+  </data>
+  <data name="NoNotifications" xml:space="preserve">
+    <value>You have no new notifications</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>This flight is no longer available</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="Passenger" xml:space="preserve">
+    <value>Passenger</value>
+  </data>
+  <data name="PassName" xml:space="preserve">
+    <value>Passenger name</value>
+  </data>
+  <data name="PassPassport" xml:space="preserve">
+    <value>Passport</value>
+  </data>
+  <data name="PassportRequired" xml:space="preserve">
+    <value>Password not specified</value>
+  </data>
+  <data name="PassSurname" xml:space="preserve">
+    <value>Passenger surname</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Password and confirmation do not match</value>
+  </data>
+  <data name="PasswordLenth" xml:space="preserve">
+    <value>Password must be at least 6 characters</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Password not specified</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="PriceIs" xml:space="preserve">
+    <value>Total price is </value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="ReturnTicket" xml:space="preserve">
+    <value>Return ticket</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Save changes</value>
+  </data>
+  <data name="SecondTitle" xml:space="preserve">
+    <value>Convenient service for booking and buying tickets for all sorts of flights!</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Lets get started!</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Surname</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value>Surname not specified</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="UsefulLinkTitle" xml:space="preserve">
+    <value>Useful links</value>
+  </data>
+  <data name="UsefulText" xml:space="preserve">
+    <value>We provide our best.</value>
+  </data>
+  <data name="NoFlightsFound" xml:space="preserve">
+    <value>There are no flights you are looking for</value>
+  </data>
+  <data name="NoFlightsTheseDay" xml:space="preserve">
+    <value>There are no flights that day</value>
+  </data>
+  <data name="NoTickets" xml:space="preserve">
+    <value>You have no tickets</value>
+  </data>
+  <data name="ConfirmationLink" xml:space="preserve">
+    <value>To complete the registration, click on the link</value>
+  </data>
+  <data name="ConfirmationMessage" xml:space="preserve">
+    <value>Further instructions for completing registration are sent to the specified e-mail address: </value>
+  </data>
+  <data name="LogError" xml:space="preserve">
+    <value>Incorrect login or password</value>
+  </data>
+  <data name="RegError" xml:space="preserve">
+    <value>User with the same login is already exist</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Admin panel</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Confirm email</value>
+  </data>
+  <data name="EditInfo" xml:space="preserve">
+    <value>Edit info</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home Page - Flights</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>My account</value>
+  </data>
+  <data name="MyBookings" xml:space="preserve">
+    <value>My bookings</value>
+  </data>
+  <data name="MyTickets" xml:space="preserve">
+    <value>My tickets</value>
+  </data>
+  <data name="NewTicket" xml:space="preserve">
+    <value>New ticket</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="FindFlights" xml:space="preserve">
+    <value>Find tickets</value>
+  </data>
+  <data name="BirthdateRequired" xml:space="preserve">
+    <value>Birthdate required</value>
+  </data>
+  <data name="ExpireRequired" xml:space="preserve">
+    <value>Expire date required</value>
+  </data>
+  <data name="IncorrectBirthdate" xml:space="preserve">
+    <value>Incorrect birthdate</value>
+  </data>
+  <data name="IncorrectExpire" xml:space="preserve">
+    <value>Incorrect expire date</value>
+  </data>
+  <data name="PassBirthdate" xml:space="preserve">
+    <value>Passenger birthdate</value>
+  </data>
+  <data name="PassExpire" xml:space="preserve">
+    <value>Passport expire date</value>
+  </data>
+  <data name="IncorrectNationality" xml:space="preserve">
+    <value>Incorrect nationality</value>
+  </data>
+  <data name="IncorrectPhoneNumber" xml:space="preserve">
+    <value>Incorrect phone number</value>
+  </data>
+  <data name="PassNationality" xml:space="preserve">
+    <value>Passenger nationality</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>Phone number required</value>
+  </data>
+  <data name="TicketsCount" xml:space="preserve">
+    <value>Count</value>
+  </data>
+  <data name="IncorrectStops" xml:space="preserve">
+    <value>Incorrect stops count (must be &lt; 3)</value>
+  </data>
+  <data name="NationalityRequired" xml:space="preserve">
+    <value>Nationality required</value>
+  </data>
+  <data name="ExtendBooking" xml:space="preserve">
+    <value>Extend booking</value>
+  </data>
+  <data name="ShowMore" xml:space="preserve">
+    <value>Show more</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="ChangePassOk" xml:space="preserve">
+    <value>We sent you an email with your new password</value>
+  </data>
+  <data name="BookDate" xml:space="preserve">
+    <value>Book date</value>
+  </data>
+  <data name="Bookings" xml:space="preserve">
+    <value>Bookings</value>
+  </data>
+  <data name="FreePlaces" xml:space="preserve">
+    <value>Free places</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPasswordError" xml:space="preserve">
+    <value>Specified email does not exist</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign In</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="StartSearchigFlights" xml:space="preserve">
+    <value>Start searchig flights</value>
+  </data>
+</root>

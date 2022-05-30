@@ -1,0 +1,167 @@
+﻿@model  SAMAirline.Model.ModelsDto.UserDto
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = Resources.Resource.MyAccount;
+    string email = Model.Email;
+    string name = Model.Name;
+    string surname = Model.Surname;
+}
+<style>
+    .custom-file-input ~ .custom-file-label::after {
+        content: "🔍"
+    }
+</style>
+
+<div class="view full-page-intro" style="background-image: url('/Style/img/background3.jpg'); background-repeat: no-repeat; background-size: cover;">
+    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+        <div class="container">
+            <div class="row wow fadeIn align-items-center">
+                <section class="mt-5 wow fadeIn">
+                    <div class="row ">
+                        <div class="col-md-4 mb-4 card">
+                            <div class="card-body" style="min-width: 18vw;">
+                                @if (Model.ProfileImage != null)
+                                {
+                                    <img class="img-fluid z-depth-1-half" src="data:image/jpeg;base64,@(Convert.ToBase64String(Model.ProfileImage))" />
+                                }
+                                else
+                                {
+                                    <img class="img-fluid z-depth-1-half" src="~/Style/img/nophoto.png" />
+                                }
+
+                                <hr>
+                                @using (Html.BeginForm("Upload", "Account", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+                                    <div class="input-group">
+                                        <div class="input-group-prepend">
+                                            <input type="submit" class="input-group-text btn-indigo" value="@Resources.Resource.Upload" />
+                                        </div>
+                                        <div class="custom-file">
+                                            <input type="file" con="Choose" class="custom-file-input" accept="image/*" name="photo" aria-describedby="inputGroupFileAddon01">
+                                            <label class="custom-file-label">@Resources.Resource.ChoosePhoto</label>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-4 card">
+                            <div class="card-body">
+                                <h3 class="dark-grey-text text-center">
+                                    <strong>@email</strong>
+                                </h3>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        @using (Html.BeginForm("EditInfo", "Account", FormMethod.Post, new { role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <h3 class="dark-grey-text text-center">
+                                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                            </h3>
+
+                                            <div class="md-form">
+                                                <i class="fas fa-user prefix grey-text"></i>
+                                                <input type="text" name="Name" id="Name" class="form-control" value="@name">
+                                                <label for="Name">@Resources.Resource.Name</label>
+                                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="md-form">
+                                                <i class="fas fa-user prefix grey-text"></i>
+                                                <input type="text" name="Surname" id="Surname" class="form-control" value="@surname">
+                                                <label for="Surname">@Resources.Resource.Surname</label>
+                                                @Html.ValidationMessageFor(model => model.Surname, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="text-center">
+                                                <button id="editInfo" @*disabled*@ class="btn btn-indigo" type="submit">@Resources.Resource.Update</button>
+                                            </div>
+                                        }
+                                    </div>
+                                    <div class="col-md-6">
+                                        @using (Html.BeginForm("ChangePassword", "Account", FormMethod.Post, new { role = "form" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+
+                                            <div class="md-form">
+                                                <i class="fas fa-key prefix grey-text"></i>
+                                                <input type="password" name="NewPassword" id="NewPassword" class="form-control">
+                                                <label for="Password">@Resources.Resource.Password</label>
+                                                @Html.ValidationMessageFor(model => model.NewPassword, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="md-form">
+                                                <i class="fas fa-key prefix grey-text"></i>
+                                                <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="form-control">
+                                                <label for="ConfirmPassword">@Resources.Resource.ConfirmPassword</label>
+                                                @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                                            </div>
+
+                                            <div class="text-center">
+                                                <button id="changePass" disabled class="btn btn-indigo" type="submit">@Resources.Resource.Update</button>
+                                            </div>
+                                        }
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $("#NewPassword").change(function () {
+            var value = $("#Password").val();
+            console.log(value);
+            if (value.length == 0 || value != $("#ConfirmPassword").val()) {
+                $("#changePass").attr("disabled", true);
+            }
+            else {
+                $("#changePass").removeAttr("disabled");
+            }
+        });
+        $("#ConfirmPassword").change(function () {
+            var value = $("#ConfirmPassword").val();
+            console.log(value);
+            if (value.length == 0 || value != $("#NewPassword").val()) {
+                $("#changePass").attr("disabled", true);
+            }
+            else {
+                $("#changePass").removeAttr("disabled");
+            }
+        });
+
+
+        //let re = new RegExp('/^[a-z0-9]+$/i');
+
+        //$("#Name").change(function () {
+        //    var value = $("#Name").val();
+        //        console.log(value, re.test(value));
+        //    if (!re.test(value) || value.length == 0) {
+        //        $("#editInfo").attr("disabled", true);
+        //    }
+        //    else {
+        //        $("#editInfo").removeAttr("disabled");
+        //    }
+        //});
+        //$("#Surname").change(function () {
+        //    var value = $("#Surname").val();
+        //        console.log(value, re.test(value));
+        //    if (!re.test(value) || value.length == 0) {
+        //        $("#editInfo").attr("disabled", true);
+        //    }
+        //    else {
+        //        $("#editInfo").removeAttr("disabled");
+        //    }
+        //});
+    });
+</script>

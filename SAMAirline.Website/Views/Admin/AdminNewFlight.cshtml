@@ -1,0 +1,258 @@
+﻿@model SAMAirline.Model.Models.NewFlightViewModel
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        font: 16px Arial;
+    }
+
+    .autocomplete {
+        /*the container must be positioned relative:*/
+        position: relative;
+        display: inline-block;
+    }
+
+    input {
+        border: 1px solid transparent;
+        padding: 10px;
+        font-size: 16px;
+    }
+
+        input[type=text] {
+            width: 100%;
+        }
+
+        input[type=submit] {
+            background-color: DodgerBlue;
+            color: #fff;
+        }
+
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-bottom: none;
+        border-top: none;
+        z-index: 99;
+        /*position the autocomplete items to be the same width as the container:*/
+        top: 100%;
+        left: 0;
+        right: 0;
+    }
+
+        .autocomplete-items div {
+            padding: 10px;
+            cursor: pointer;
+            background-color: #fff;
+            border-bottom: 1px solid #d4d4d4;
+        }
+
+            .autocomplete-items div:hover {
+                background-color: #e9e9e9;
+            }
+
+    .autocomplete-active {
+        background-color: DodgerBlue !important;
+        color: #ffffff;
+    }
+
+    .md-form {
+        position: relative;
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
+    }
+</style>
+
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <br />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Airline, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.Airline, new { htmlAttributes = new { @id = "AirlineInput", @class = "form-control", @type = "text", @placeholder = "Airline code" } })
+                @Html.ValidationMessageFor(model => model.Airline, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.DepartureDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.DepartureDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DepartureDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2 ">
+                @Html.LabelFor(model => model.DepartureTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.DepartureTime, new { htmlAttributes = new { @type = "time", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.DepartureTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.DepartureAirport, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.DepartureAirport, new { htmlAttributes = new { @id = "FromInput", @class = "form-control", @type = "text", @placeholder = "Departing from" } })
+                @Html.ValidationMessageFor(model => model.DepartureAirport, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-5">
+                <label class="text-danger" name="ErrorText"></label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Aircraft, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.Aircraft, new { htmlAttributes = new { @id = "AircraftInput", @class = "form-control", @type = "text", @placeholder = "Aircraft code" } })
+                @Html.ValidationMessageFor(model => model.Aircraft, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.ArrivalDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.ArrivalDate, new { htmlAttributes = new { @type = "date", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArrivalDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.ArrivalTime, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.ArrivalTime, new { htmlAttributes = new { @type = "time", @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ArrivalTime, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.ArrivalAirport, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.ArrivalAirport, new { htmlAttributes = new { @id = "ToInput", @class = "form-control", @type = "text", @placeholder = "Arrives in" } })
+                @Html.ValidationMessageFor(model => model.ArrivalAirport, "", new { @class = "text-danger" })
+            </div>
+            <div class="col-md-5">
+                <label class="text-danger" name="ErrorText"></label>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Stops, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.Stops, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Stops, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <div class="col-md-2">
+                @Html.LabelFor(model => model.Price, htmlAttributes: new { @class = "control-label col-md-2" })
+            </div>
+            <div class="col-md-5 md-form">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-md-2">
+                <label id="result"></label>
+            </div>
+            <div class="col-md-5">
+                <button id="NewFlight" onclick="CreateNewFlight();" class="btn btn-md btn-success">Create</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+<script>
+
+    autocomplete(document.getElementById("AirlineInput"), airlines);
+    autocomplete(document.getElementById("AircraftInput"), aircrafts);
+    autocomplete(document.getElementById("FromInput"), airports);
+    autocomplete(document.getElementById("ToInput"), airports);
+
+    $(document).ready(function () {
+        $("input[name=DepartureAirport]").change(function () {
+            if ($("input[name=DepartureAirport]").val() == $("input[name=ArrivalAirport]").val()) {
+                $("label[name=ErrorText]").show().text("Departure and arrival airports cannot match").delay(1500).fadeOut("slow");
+                $("#NewFlight").attr("disabled", true);
+            }
+            else {
+                $("#NewFlight").removeAttr("disabled");
+            }
+        });
+        $("input[name=ArrivalAirport]").change(function () {
+            if ($("input[name=DepartureAirport]").val() == $("input[name=ArrivalAirport]").val()) {
+                $("label[name=ErrorText]").show().text("Departure and arrival airports cannot match").delay(1500).fadeOut("slow");
+                $("#NewFlight").attr("disabled", true);
+            }
+            else {
+                $("#NewFlight").removeAttr("disabled");
+            }
+        });
+    });
+
+    function CreateNewFlight() {
+        $('.preloader').show();
+        console.log($("input[name=DepartureAirport]").val());
+        if ($("input[name=DepartureAirport]").val() == $("input[name=ArrivalAirport]").val() && $("input[name=DepartureAirport]").val() != "") {
+            $("label[name=ErrorText]").text("Departure and arrival airports cannot match");
+            $('.preloader').fadeOut();
+        }
+        else {
+            $.ajax({
+                type: "POST",
+                url: '/Admin/CreateNewFlight',
+                data: {
+                    Airline: $("input[name=Airline]").val(),
+                    DepartureDate: $("input[name=DepartureDate]").val(),
+                    DepartureTime: $("input[name=DepartureTime]").val(),
+                    DepartureAirport: $("input[name=DepartureAirport]").val(),
+                    Aircraft: $("input[name=Aircraft]").val(),
+                    ArrivalDate: $("input[name=ArrivalDate]").val(),
+                    ArrivalTime: $("input[name=ArrivalTime]").val(),
+                    ArrivalAirport: $("input[name=ArrivalAirport]").val(),
+                    Stops: $("input[name=Stops]").val(),
+                    Price: $("input[name=Price]").val()
+                },
+                success: function (data) {
+                    $('.preloader').fadeOut();
+                    $("#result").fadeIn(1);
+                    $("#result").empty();
+                    $("#result").html(data);
+                    $("#result").delay(3500).fadeOut("slow");
+                }
+            });
+        }
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

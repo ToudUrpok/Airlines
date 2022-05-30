@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AlreadyBooked" xml:space="preserve">
+    <value>У вас уже есть бронь на этот рейс</value>
+  </data>
+  <data name="ArrCityRequired" xml:space="preserve">
+    <value>Город прибытия не указан</value>
+  </data>
+  <data name="Arrival" xml:space="preserve">
+    <value>Отправлние</value>
+  </data>
+  <data name="ArrivalCity" xml:space="preserve">
+    <value>Город прибытия</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="BackToBookings" xml:space="preserve">
+    <value>Назад к брони</value>
+  </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>К списку</value>
+  </data>
+  <data name="BuyTicket" xml:space="preserve">
+    <value>Купить билет</value>
+  </data>
+  <data name="CancelBooking" xml:space="preserve">
+    <value>Отменить бронь</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Номер карты</value>
+  </data>
+  <data name="CardRequired" xml:space="preserve">
+    <value>Номер карты не указан</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Измение пароля</value>
+  </data>
+  <data name="ChooseAmount" xml:space="preserve">
+    <value>Выберите количество билетов</value>
+  </data>
+  <data name="ChooseLang" xml:space="preserve">
+    <value>Выберите язык</value>
+  </data>
+  <data name="ChoosePhoto" xml:space="preserve">
+    <value>Выберите фото</value>
+  </data>
+  <data name="ConfirmPassword" xml:space="preserve">
+    <value>Подтвердите пароль</value>
+  </data>
+  <data name="ContactInfo" xml:space="preserve">
+    <value>Контакты</value>
+  </data>
+  <data name="ContactInfoText" xml:space="preserve">
+    <value>Вы можете связаться с нами в любое время</value>
+  </data>
+  <data name="CorrectAmount" xml:space="preserve">
+    <value>Выберите количество (не более 5)</value>
+  </data>
+  <data name="CreateAccount" xml:space="preserve">
+    <value>Создать аккаунт</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="DepartingAt" xml:space="preserve">
+    <value>Вылет</value>
+  </data>
+  <data name="DepartingCity" xml:space="preserve">
+    <value>Город отправления</value>
+  </data>
+  <data name="DepCityRequired" xml:space="preserve">
+    <value>Город отправления не указан</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="DescriptionText" xml:space="preserve">
+    <value>Это веб-приложение предназначено для бронирования и покупки авиабилетов на рейсы из любой точки мира.</value>
+  </data>
+  <data name="Email" xml:space="preserve">
+    <value>Электронная почта</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Электронная почта не указана</value>
+  </data>
+  <data name="EnterCardNumber" xml:space="preserve">
+    <value>Введите номер карты, 16 цифр</value>
+  </data>
+  <data name="EnterName" xml:space="preserve">
+    <value>Введите имя</value>
+  </data>
+  <data name="EnterSurname" xml:space="preserve">
+    <value>Введите фамилию</value>
+  </data>
+  <data name="FlyingFrom" xml:space="preserve">
+    <value>Откуда</value>
+  </data>
+  <data name="FlyingTo" xml:space="preserve">
+    <value>Куда</value>
+  </data>
+  <data name="IncorrectAmount" xml:space="preserve">
+    <value>Пожалуйста выберите от 1 до 5 мест</value>
+  </data>
+  <data name="IncorrectArrivalCity" xml:space="preserve">
+    <value>Неверный город прибытия</value>
+  </data>
+  <data name="IncorrectCardNumber" xml:space="preserve">
+    <value>Неверный номер карты, укажите 16 цифр</value>
+  </data>
+  <data name="IncorrectDelay" xml:space="preserve">
+    <value>Пожалуйста выберите от 1 до 3 часов</value>
+  </data>
+  <data name="IncorrectDepartureCity" xml:space="preserve">
+    <value>Неверный город отправления</value>
+  </data>
+  <data name="IncorrectEmail" xml:space="preserve">
+    <value>Неверный адрес электронной почты</value>
+  </data>
+  <data name="IncorrectFlightNumber" xml:space="preserve">
+    <value>Неверный номер перелета</value>
+  </data>
+  <data name="IncorrectName" xml:space="preserve">
+    <value>Неверное имя</value>
+  </data>
+  <data name="IncorrectPassport" xml:space="preserve">
+    <value>Неверный номер паспорта</value>
+  </data>
+  <data name="IncorrectPlaces" xml:space="preserve">
+    <value>Неверное количество мест</value>
+  </data>
+  <data name="IncorrectPrice" xml:space="preserve">
+    <value>Неверная цена</value>
+  </data>
+  <data name="IncorrectSurname" xml:space="preserve">
+    <value>Неверная фамилия</value>
+  </data>
+  <data name="Left" xml:space="preserve">
+    <value>св.</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="MainTitle" xml:space="preserve">
+    <value>Добро пожаловать в лучший авиасервис для бронирования мест на авиарейсы!</value>
+  </data>
+  <data name="MakeBooking" xml:space="preserve">
+    <value>Бронировать за</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="NameRequired" xml:space="preserve">
+    <value>Имя не указано</value>
+  </data>
+  <data name="NewBooking" xml:space="preserve">
+    <value>Бронь</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="NoBookings" xml:space="preserve">
+    <value>У вас нет активных бронирований</value>
+  </data>
+  <data name="NoNotifications" xml:space="preserve">
+    <value>Нет уведомлений</value>
+  </data>
+  <data name="NotAvailable" xml:space="preserve">
+    <value>Этот перелет больше не доступен</value>
+  </data>
+  <data name="NoTickets" xml:space="preserve">
+    <value>У вас нет купленных билетов</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Уведомления</value>
+  </data>
+  <data name="Passenger" xml:space="preserve">
+    <value>Пассажир</value>
+  </data>
+  <data name="PassName" xml:space="preserve">
+    <value>Имя пассажира</value>
+  </data>
+  <data name="PassPassport" xml:space="preserve">
+    <value>Паспорт пассажира</value>
+  </data>
+  <data name="PassportRequired" xml:space="preserve">
+    <value>Номер паспорта не указан</value>
+  </data>
+  <data name="PassSurname" xml:space="preserve">
+    <value>Фамиля пассажира</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="PasswordConfirmation" xml:space="preserve">
+    <value>Пароль и его подтверждение не совпадают</value>
+  </data>
+  <data name="PasswordLenth" xml:space="preserve">
+    <value>Длина пароля должна быть не менее 6 символов</value>
+  </data>
+  <data name="PasswordRequired" xml:space="preserve">
+    <value>Пароль не указан</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="PriceIs" xml:space="preserve">
+    <value>Общая цена </value>
+  </data>
+  <data name="Registration" xml:space="preserve">
+    <value>Зарегистрироваться</value>
+  </data>
+  <data name="ReturnTicket" xml:space="preserve">
+    <value>Вернуть билет</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>Сохранить изменения</value>
+  </data>
+  <data name="SecondTitle" xml:space="preserve">
+    <value>Удобный сервис для бронирования и покупки билетов на любые рейсы!</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Вперед!</value>
+  </data>
+  <data name="Surname" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="SurnameRequired" xml:space="preserve">
+    <value>фамилия не указана</value>
+  </data>
+  <data name="Upload" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="UsefulLinkTitle" xml:space="preserve">
+    <value>Полезные ссылки</value>
+  </data>
+  <data name="UsefulText" xml:space="preserve">
+    <value>Мы делем все возможное</value>
+  </data>
+  <data name="NoFlightsFound" xml:space="preserve">
+    <value>Не найдено ни одного перелета по вашему запросу</value>
+  </data>
+  <data name="NoFlightsTheseDay" xml:space="preserve">
+    <value>Не найдено ни одного перелета в этот день</value>
+  </data>
+  <data name="ConfirmationLink" xml:space="preserve">
+    <value>Для завершения регистрации перейдите по ссылке</value>
+  </data>
+  <data name="ConfirmationMessage" xml:space="preserve">
+    <value>На указанный почтовый адрес высланы дальнейшие инструкции по завершению регистрации:</value>
+  </data>
+  <data name="LogError" xml:space="preserve">
+    <value>Неправильный логин или пароль</value>
+  </data>
+  <data name="RegError" xml:space="preserve">
+    <value>Пользователь с таким логином уже существует</value>
+  </data>
+  <data name="AdminPanel" xml:space="preserve">
+    <value>Панель модератора</value>
+  </data>
+  <data name="ConfirmEmail" xml:space="preserve">
+    <value>Подтверждение почты</value>
+  </data>
+  <data name="EditInfo" xml:space="preserve">
+    <value>Изменение данных</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная - перелеты</value>
+  </data>
+  <data name="MyAccount" xml:space="preserve">
+    <value>Мой профиль</value>
+  </data>
+  <data name="MyBookings" xml:space="preserve">
+    <value>Мои бронирования</value>
+  </data>
+  <data name="MyTickets" xml:space="preserve">
+    <value>Мои билеты</value>
+  </data>
+  <data name="NewTicket" xml:space="preserve">
+    <value>Новый билеты</value>
+  </data>
+  <data name="ReturnDate" xml:space="preserve">
+    <value>Обратно</value>
+  </data>
+  <data name="FindFlights" xml:space="preserve">
+    <value>Найти билеты</value>
+  </data>
+  <data name="BirthdateRequired" xml:space="preserve">
+    <value>Дата рождения не указана</value>
+  </data>
+  <data name="ExpireRequired" xml:space="preserve">
+    <value>Срок действия не указан</value>
+  </data>
+  <data name="IncorrectBirthdate" xml:space="preserve">
+    <value>Неверная дата рождения</value>
+  </data>
+  <data name="IncorrectExpire" xml:space="preserve">
+    <value>Неверный срок действия</value>
+  </data>
+  <data name="PassBirthdate" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="PassExpire" xml:space="preserve">
+    <value>Срок действия</value>
+  </data>
+  <data name="IncorrectNationality" xml:space="preserve">
+    <value>Некорректное гражданство</value>
+  </data>
+  <data name="IncorrectPhoneNumber" xml:space="preserve">
+    <value>Неверный номер телефона</value>
+  </data>
+  <data name="PassNationality" xml:space="preserve">
+    <value>Гражданство</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Номер телефона</value>
+  </data>
+  <data name="PhoneNumberRequired" xml:space="preserve">
+    <value>Укажите номер телефона</value>
+  </data>
+  <data name="TicketsCount" xml:space="preserve">
+    <value>Количество</value>
+  </data>
+  <data name="IncorrectStops" xml:space="preserve">
+    <value>Неверное количество пересадок (не более 3)</value>
+  </data>
+  <data name="NationalityRequired" xml:space="preserve">
+    <value>Гражданство не указано</value>
+  </data>
+  <data name="ExtendBooking" xml:space="preserve">
+    <value>Продлить бронь</value>
+  </data>
+  <data name="ShowMore" xml:space="preserve">
+    <value>Показать еще</value>
+  </data>
+  <data name="Update" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="ChangePassOk" xml:space="preserve">
+    <value>Мы отправили вам письмо с новым паролем</value>
+  </data>
+  <data name="BookDate" xml:space="preserve">
+    <value>Дата бронирования</value>
+  </data>
+  <data name="Bookings" xml:space="preserve">
+    <value>Бронирования</value>
+  </data>
+  <data name="FreePlaces" xml:space="preserve">
+    <value>Места</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Сброс пароля</value>
+  </data>
+  <data name="ResetPasswordError" xml:space="preserve">
+    <value>Указанной почты не существует</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="StartSearchigFlights" xml:space="preserve">
+    <value>Начать искать перелеты</value>
+  </data>
+</root>

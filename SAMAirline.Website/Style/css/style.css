@@ -1,0 +1,268 @@
+﻿/* Required height of parents of the Full Page Carousel for proper displaying carousel itself */
+html,
+body,
+.view {
+    height: 100%;
+}
+
+input{
+    padding-left: 10px !important;
+}
+
+main {
+    min-height: 1000px;
+}
+/* Full Page Carousel itself*/
+.carousel {
+    height: 100%;
+}
+
+    .carousel .carousel-inner {
+        height: 100%;
+    }
+
+        .carousel .carousel-inner .carousel-item,
+        .carousel .carousel-inner .active {
+            height: 100%;
+        }
+
+/* Navbar animation */
+.navbar {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.top-nav-collapse {
+    background-color: #1C2331;
+}
+
+/* Adding color to the Navbar on mobile */
+@media only screen and (max-width: 768px) {
+    .navbar {
+        background-color: #1C2331;
+    }
+}
+
+/* Footer color for sake of consistency with Navbar */
+.page-footer {
+    background-color: #1C2331;
+}
+
+html,
+body,
+header,
+.carousel {
+    height: 60vh;
+}
+
+@media (max-width: 740px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+        height: 100vh;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+
+    html,
+    body,
+    header,
+    .carousel {
+        height: 100vh;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #929FBA !important;
+    }
+}
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font: 16px Arial;
+}
+
+.autocomplete {
+    /*the container must be positioned relative:*/
+    position: relative;
+    display: inline-block;
+}
+
+input {
+    border: 1px solid transparent;
+    padding: 10px;
+    font-size: 16px;
+}
+
+    input[type=text] {
+        width: 100%;
+    }
+
+    input[type=submit] {
+        background-color: DodgerBlue;
+        color: #fff;
+    }
+
+.autocomplete-items {
+    position: absolute;
+    border: 1px solid #d4d4d4;
+    border-bottom: none;
+    border-top: none;
+    z-index: 99;
+    /*position the autocomplete items to be the same width as the container:*/
+    top: 100%;
+    left: 0;
+    right: 0;
+}
+
+    .autocomplete-items div {
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+        .autocomplete-items div:hover {
+            background-color: #e9e9e9;
+        }
+
+.autocomplete-active {
+    background-color: DodgerBlue !important;
+    color: #ffffff;
+}
+
+.card {
+    margin-bottom: 30px !important; 
+}
+.border-rounded {
+    border-radius: .25rem !important;
+    border: 1px solid #dee2e6 !important;
+}
+
+.preloader {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    background: #fff;
+    z-index: 1001;
+}
+
+.preloader__image {
+    position: relative;
+    top: 50%;
+    left: 50%;
+    width: 250px;
+    height: 250px;
+    margin-top: -170px;
+    margin-left: -120px;
+    background: url('/style/img/2loader.gif') no-repeat 50% 50%; /*расположение (url) изображения gif и др. параметры*/
+}
+
+.loaded_hiding .preloader {
+    transition: 0.3s opacity;
+    opacity: 0;
+}
+
+.loaded .preloader {
+    display: none;
+}
+
+#preloader6 {
+    position: relative;
+    width: 42px;
+    height: 42px;
+    animation: preloader_6 5s infinite linear
+}
+
+    #preloader6 span {
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        background: red;
+        display: block;
+        animation: preloader_6_span 1s infinite linear
+    }
+
+        #preloader6 span:nth-child(1) {
+            background: #5a65d1
+        }
+
+        #preloader6 span:nth-child(2) {
+            left: 22px;
+            background: #5a65d1;
+            animation-delay: .2s
+        }
+
+        #preloader6 span:nth-child(3) {
+            top: 22px;
+            background: #5a65d1;
+            animation-delay: .4s
+        }
+
+        #preloader6 span:nth-child(4) {
+            top: 22px;
+            left: 22px;
+            background: #5a65d1;
+            animation-delay: .6s
+        }
+
+@keyframes preloader_6_span {
+    0%,100% {
+        transform: scale(1)
+    }
+
+    50% {
+        transform: scale(.5)
+    }
+}
+
+html,
+body,
+header,
+.view {
+    height: 100%;
+}
+
+@media (max-width: 559px) {
+
+    html,
+    body,
+    header,
+    .view {
+        height: 1000px;
+    }
+}
+
+@media (min-width: 560px) and (max-width: 740px) {
+
+    html,
+    body,
+    header,
+    .view {
+        height: 700px;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+
+    html,
+    body,
+    header,
+    .view {
+        height: 600px;
+    }
+}
+
+@media (min-width: 800px) and (max-width: 850px) {
+    .navbar:not(.top-nav-collapse) {
+        background: #1C2331 !important;
+    }
+}

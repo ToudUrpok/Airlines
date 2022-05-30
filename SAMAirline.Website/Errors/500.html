@@ -1,0 +1,177 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link href="~/Style/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Style/css/mdb.min.css" rel="stylesheet">
+    <link href="~/Style/css/style.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+        <div class="container">
+            <!-- Brand -->
+            <strong>
+                <a class="nav-link" href="/Home/Index" style="color: white;padding-top:12px; font-size:23px; padding-bottom:14px" role="button" aria-haspopup="true" aria-expanded="false">
+                    Book <i class="fa fa-plane" style="font-size:23px"></i>
+                </a>
+            </strong>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+
+                    @*
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Home/Index">Home</a>
+                    </li>*@
+                    @if (isAuthenticated)
+                    {
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Booking/Index">@Resources.Resource.Bookings</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Account/MyAccount">@Resources.Resource.Profile</a>
+                    </li>
+                    }
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+
+                    @if (isAdmin)
+                    {
+                    <li class="nav-item">
+                        <a href="/Admin/Index" class="nav-link">
+                            <i class="fas fa-crown"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Admin/ErrorTest" class="nav-link">
+                            <i class="fa fa-question"></i>
+                        </a>
+                    </li>
+                    }
+                    <li class="nav-item">
+                        <a id="btn-tooltip" title="My notifications" data-toggle="modal" data-target="#MyNotifications" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell" style="margin: 5px 15px;color: white;font-size: 22px;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/ChangeCulture?lang=ru" class="nav-link">
+                            РУ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a disabled class="nav-link">
+                            <span> /</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/ChangeCulture?lang=en" class="nav-link">
+                            EN
+                        </a>
+                    </li>
+
+                    @if (isAuthenticated)
+                    {
+                    <li class="nav-item">
+                        <a href="/Account/Logout" class="nav-link border border-light rounded">
+                            <i class="fas fa-sign-out-alt"></i> @Resources.Resource.SignOut
+                        </a>
+                    </li>
+                    }
+                    else
+                    {
+                    <li class="nav-item">
+                        <a href="/Account/Login" class="nav-link border border-light rounded">
+                            <i class="fas fa-sign-in-alt"></i> @Resources.Resource.SignIn
+                        </a>
+                    </li>
+                    }
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <div class="view full-page-intro" style="background-image: url('/Style/img/background3.jpg'); background-repeat: no-repeat; background-size: cover;">
+        <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+            <div class="container text-white">
+                <h2 class="my-5 h2 text-center">
+                    Oooops... Something went wrong!
+                </h2>
+
+            </div>
+        </div>
+    </div>
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+        <div class="pt-4">
+            <p>@Resources.Resource.DescriptionText</p>
+        </div>
+
+        <hr class="my-4">
+
+        <!--Call to action-->
+        <div class="pt-4" style="padding-top: 0px!important">
+            <a class="btn btn-outline-white" href="https://github.com/mixershpixer/SAM.Airline" target="_blank" role="button">
+                Get source <i class="fas fa-download ml-2"></i>
+            </a>
+            <a class="btn btn-outline-white" href="mailto:mixer.shpixer@mail.ru" target="_blank" role="button">
+                Email us <i class="fa fa-envelope ml-2"></i>
+            </a>
+        </div>
+        <!--/.Call to action-->
+
+        <hr class="my-4">
+
+        <!-- Social icons -->
+        <div class="pb-4">
+            <a href="" target="_blank">
+                <i class="fab fa-facebook-f mr-3"></i>
+            </a>
+
+            <a href="" target="_blank">
+                <i class="fab fa-twitter mr-3"></i>
+            </a>
+        </div>
+        <!-- Social icons -->
+        <!--Copyright-->
+        <div class="footer-copyright py-3">
+            <p class="ftex">&copy; 2022 All Rights Reserved</p>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+
+    <script type="text/javascript" src="~/Style/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/mdb.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/scripts.js"></script>
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+</body>
+
+</html>

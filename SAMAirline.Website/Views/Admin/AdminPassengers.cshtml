@@ -1,0 +1,56 @@
+﻿@using SAMAirline.Model.Models
+@model PaginationModel
+@{
+    int number = 0;
+    var passengers = Model.UserList.Data;
+    int pagesCount = Model.UserList.PagesCount;
+    int rowsCount = Model.UserList.RowsCount;
+}
+
+<br />
+@if (pagesCount > 1)
+{
+    <div id="pugAdminPassengerButtons" style="margin: auto; width: max-content;">
+        @for (int i = 0; i < pagesCount; i++)
+        {
+            number = i + 1;
+            <button value="@i" style="border-radius:20px" name="@pagesCount" onclick="FuncAdminPugPassengers(@i, @pagesCount)" id="page_btn" style="margin-left:5px" class="btn btn-def-pag">@number</button>
+        }
+    </div>
+}
+
+<h3 style="text-align:center">Passengers</h3>
+@if (rowsCount > 0)
+{
+    <table class="table table-hover animated animatedFadeInUp fadeInUp">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Email</th>
+                <th scope="col">Role</th>
+                <th scope="col">Is Confirmed</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var p in passengers)
+            {
+                <tr>
+                    <td>@p.UserId</td>
+                    <td>@p.Name</td>
+                    <td>@p.Surname</td>
+                    <td>@p.Email</td>
+                    <td>@p.Role</td>
+                    <td>@p.IsConfirmed</td>
+                    <td>@Html.ActionLink("Delete user", "DeleteUser", new { passengerId = @p.UserId })</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <div style="margin: auto; width: max-content;">There are no passengers</div>
+}

@@ -1,0 +1,13 @@
+﻿@model SAMAirline.Model.ModelsDto.NotificationDto
+@{
+    var id = "notificationItem" + @Model.NotificationId;
+}
+<div id=@id>
+    <button type="button" class="close" onclick="DeleteNotification(@Model.NotificationId)">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="row" style="padding: 0 1vw 0 2vw;">
+        <span style="font-size: 1vw;">@Model.Message</span>
+    </div>
+    <hr />
+</div>

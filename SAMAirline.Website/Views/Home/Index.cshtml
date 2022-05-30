@@ -1,0 +1,724 @@
+﻿@using SAMAirline.Logic.Interfaces
+@using SAMAirline.Model.Models
+@model SAMAirline.Model.PaginationModels.FlightPaginationModel
+@{
+    Layout = null;
+    ViewBag.Title = Resources.Resource.Home;
+    var service = DependencyResolver.Current.GetService<IPassengerService>();
+    var notificationService = DependencyResolver.Current.GetService<INotificationService>();
+    var isAuthenticated = false;
+    var isAdmin = false;
+    var count = 0;
+    NotificationWindowViewModel notifications = null;
+
+    if (User.Identity.IsAuthenticated && service.IsExists(User.Identity.Name))
+    {
+        isAuthenticated = true;
+        isAdmin = service.IsAdmin(User.Identity.Name);
+        notifications = notificationService.GetUsersNotifications(User.Identity.Name);
+        count = notifications.Count;
+    }
+}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.0.0/animate.min.css">
+    <link href="~/Style/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Style/css/mdb.min.css" rel="stylesheet">
+    <link href="~/Style/css/style.min.css" rel="stylesheet">
+    <link href="~/Style/css/style.css" rel="stylesheet">
+
+    <script src="~/Style/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/scripts.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font: 16px Arial;
+        }
+
+        .autocomplete {
+            /*the container must be positioned relative:*/
+            position: relative;
+            display: inline-block;
+        }
+
+        input {
+            border: 1px solid transparent;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+            input[type=text] {
+                width: 100%;
+            }
+
+            input[type=submit] {
+                background-color: DodgerBlue;
+                color: #fff;
+            }
+
+        .autocomplete-items {
+            position: absolute;
+            border: 1px solid #d4d4d4;
+            border-bottom: none;
+            border-top: none;
+            z-index: 99;
+            /*position the autocomplete items to be the same width as the container:*/
+            top: 100%;
+            left: 0;
+            right: 0;
+        }
+
+            .autocomplete-items div {
+                padding: 10px;
+                cursor: pointer;
+                background-color: #fff;
+                border-bottom: 1px solid #d4d4d4;
+            }
+
+                .autocomplete-items div:hover {
+                    background-color: #e9e9e9;
+                }
+
+        .autocomplete-active {
+            background-color: DodgerBlue !important;
+            color: #ffffff;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="preloader">
+        <div class="preloader__image"></div>
+    </div>
+    <!-- Navbar -->
+    <nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+        <div class="container">
+            <!-- Brand -->
+            <strong>
+                <a class="nav-link" href="/Home/Index" style="color: white;padding-top:12px; font-size:23px; padding-bottom:14px" role="button" aria-haspopup="true" aria-expanded="false">
+                     <i class="fa fa-plane" style="font-size:23px"></i>
+                </a>
+            </strong>
+
+            <!-- Collapse -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Links -->
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+                <!-- Left -->
+                <ul class="navbar-nav mr-auto">
+
+                    @*<li class="nav-item">
+                            <a class="nav-link" href="/Home/Index">Home</a>
+                        </li>*@
+                    @if (isAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Booking/Index">@Resources.Resource.Bookings</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Account/MyAccount">@Resources.Resource.Profile</a>
+                        </li>
+                    }
+                </ul>
+
+                <!-- Right -->
+                <ul class="navbar-nav nav-flex-icons">
+
+                    @if (isAdmin)
+                    {
+                        <li class="nav-item">
+                            <a href="/Admin/Index" class="nav-link">
+                                <i class="fas fa-crown"></i>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="/Admin/ErrorTest" class="nav-link">
+                                <i class="fa fa-question"></i>
+                            </a>
+                        </li>
+                    }
+                    <li class="nav-item">
+                        <a id="btn-tooltip" title="My notifications" data-toggle="modal" data-target="#MyNotifications" role="button" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bell" style="margin: 5px 15px;color: white;font-size: 22px;"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/ChangeCulture?lang=ru" class="nav-link">
+                            РУ
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a disabled class="nav-link">
+                            <span> /</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="/Home/ChangeCulture?lang=en" class="nav-link">
+                            EN
+                        </a>
+                    </li>
+
+                    @if (isAuthenticated)
+                    {
+                        <li class="nav-item">
+                            <a href="/Account/Logout" class="nav-link border border-light rounded">
+                                <i class="fas fa-sign-out-alt"></i> @Resources.Resource.SignOut
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a href="/Account/Login" class="nav-link border border-light rounded">
+                                <i class="fas fa-sign-in-alt"></i> @Resources.Resource.SignIn
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+            </div>
+
+        </div>
+    </nav>
+    <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel" style="height: 100%;">
+
+        <!--Indicators-->
+        <ol class="carousel-indicators">
+            <li data-target="#carousel-example-1z" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-example-1z" data-slide-to="1"></li>
+            <li data-target="#carousel-example-1z" data-slide-to="2"></li>
+        </ol>
+        <!--/.Indicators-->
+        <!--Slides-->
+        <div class="carousel-inner" role="listbox">
+
+            <!--First slide-->
+            <div class="carousel-item active">
+                <div class="view" style="background-image: url('/Style/img/background6.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+                    <!-- Mask & flexbox options-->
+                    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+                        <!-- Content -->
+                        <div class="text-center white-text mx-5 wow fadeIn">
+                            <div class="section banner-full bgi-cover-center animatedFadeIn1" style="height:750px" data-background="/Style/images/bg_13.jpeg">
+                                <div class="container h-100 d-flex align-items-center " style="max-width: 1250px;">
+                                    <div class="wrap-caption text-white" style="width:100% !important; text-align:center">
+                                        <label class="caption-heading" style="font-size:2.5em; font-weight:800">@Resources.Resource.MainTitle</label>
+                                        <p class="">@Resources.Resource.SecondTitle</p>
+                                        <button class="btn btn-primary" onclick="ScrollIndex()" style="font-size: 16px;">@Resources.Resource.Start</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+
+                    </div>
+                    <!-- Mask & flexbox options-->
+
+                </div>
+            </div>
+            <!--/First slide-->
+            <!--Second slide-->
+            <div class="carousel-item">
+                <div class="view" style="background-image: url('/Style/img/background8.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+                    <!-- Mask & flexbox options-->
+                    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+                        <!-- Content -->
+                        <div class="text-center white-text mx-5 wow fadeIn">
+                            <div class="section banner-full bgi-cover-center animatedFadeIn1" style="height:750px" data-background="/Style/images/bg_13.jpeg">
+                                <div class="container h-100 d-flex align-items-center " style="max-width: 1250px;">
+                                    <div class="wrap-caption text-white" style="width:100% !important; text-align:center">
+                                        <label class="caption-heading" style="font-size:2.5em; font-weight:800">@Resources.Resource.MainTitle</label>
+                                        <p class="">@Resources.Resource.SecondTitle</p>
+                                        <button class="btn btn-primary" onclick="ScrollIndex()" style="font-size: 16px;">@Resources.Resource.Start</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+
+                    </div>
+                    <!-- Mask & flexbox options-->
+
+                </div>
+            </div>
+            <!--/Second slide-->
+            <!--Third slide-->
+            <div class="carousel-item">
+                <div class="view" style="background-image: url('/Style/img/background7.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+                    <!-- Mask & flexbox options-->
+                    <div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+
+                        <!-- Content -->
+                        <div class="text-center white-text mx-5 wow fadeIn">
+                            <div class="section banner-full bgi-cover-center animatedFadeIn1" style="height:750px" data-background="/Style/images/bg_13.jpeg">
+                                <div class="container h-100 d-flex align-items-center " style="max-width: 1250px;">
+                                    <div class="wrap-caption text-white" style="width:100% !important; text-align:center">
+                                        <label class="caption-heading" style="font-size:2.5em; font-weight:800">@Resources.Resource.MainTitle</label>
+                                        <p class="">@Resources.Resource.SecondTitle</p>
+                                        <button class="btn btn-primary" onclick="ScrollIndex()" style="font-size: 16px;">@Resources.Resource.Start</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Content -->
+
+                    </div>
+                    <!-- Mask & flexbox options-->
+
+                </div>
+            </div>
+            <!--/Third slide-->
+
+        </div>
+        <!--/.Slides-->
+        <!--Controls-->
+        <a class="carousel-control-prev" href="#carousel-example-1z" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carousel-example-1z" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+        <!--/.Controls-->
+
+    </div>
+    <main>
+        <div class="container">
+            <div class="card wow fadeIn" style="position: -webkit-sticky;position: sticky; top: 65px; z-index:100;padding-top: 5px; padding-bottom: 0;">
+                <section class="card-body" style="padding-top: 5px; padding-bottom: 0;">
+                    <div class="row wow fadeIn">
+                        <div class="col-md-12 mb-6">
+                            @using (Html.BeginForm("Index", "Flight", FormMethod.Post))
+                            {
+                                @Html.AntiForgeryToken()
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="center">
+                                    <div style="padding: 15px 15px 0 15px; border-bottom: 3px solid #4285f4!important; border-radius:10px; border-top: 3px solid #4285f4!important;">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row" style=" padding-bottom: 25px;">
+                                                    <div class="col-md-3 autocomplete">
+                                                        <div class="row" style="margin-left: 0px  !important">
+                                                            <label style="font-size:17px; font-weight:500">@Resources.Resource.FlyingFrom</label>
+                                                            <div class="row">
+                                                                <div class="col-md-9 col-sm-12" style="margin: 0 0 5px 0; margin: 0 0 5px 0; padding-right: 0px;">
+                                                                    @Html.EditorFor(model => model.From, new { htmlAttributes = new { @id = "FromInput", @class = "form-control", @type = "text", @placeholder = Resources.Resource.DepartingCity } })
+                                                                    <div style="max-height:18px; text-align: center;">
+                                                                        @Html.ValidationMessageFor(model => model.From, "", new { @class = "text-danger" })
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-md-3 col-sm-12" style="margin: 5px 0">
+                                                                    <a class="btn btn-primary" onclick="ChangeAirports(); return false;" style="padding-left: 10px;padding-right: 10px;padding-top: 5px;padding-bottom: 5px;margin-bottom: 0px;margin-top: 0px;">
+                                                                        <i class="fas fa-exchange-alt"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-3 autocomplete">
+                                                        <label style="font-size:17px; font-weight:500">@Resources.Resource.FlyingTo</label>
+                                                        @Html.EditorFor(model => model.To, new { htmlAttributes = new { @id = "ToInput", @class = "form-control", @type = "text", @placeholder = Resources.Resource.ArrivalCity } })
+                                                        <div style="max-height:18px; text-align: center;">
+                                                            @Html.ValidationMessageFor(model => model.To, "", new { @class = "text-danger" })
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size:17px; font-weight:500">@Resources.Resource.DepartingAt</label>
+                                                        @Html.EditorFor(model => model.DepDate, new { htmlAttributes = new { @type = "date", @style = "min-width: 170px;", @class = "form-control" } })
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size:17px; font-weight:500">@Resources.Resource.ReturnDate</label>
+                                                        @Html.EditorFor(model => model.ReturnDate, new { htmlAttributes = new { @type = "date", @style = "min-width: 170px;", @class = "form-control" } })
+                                                    </div>
+                                                    <div class="col-md-2">
+                                                        <label style="font-size:17px; font-weight:500">@Resources.Resource.TicketsCount</label>
+                                                        @Html.DropDownList("Count", new SelectList(new List<int>() { 1, 2, 3, 4, 5, 6, 7, 8, 9 }), new { @class = "custom-select d-block w-100" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="d-flex justify-content-center">
+                                        <button type="submit" onclick="ShowLoader();" style="margin-top: 10px;" class="btn btn-primary">@Resources.Resource.FindFlights <i class="fa fa-search"></i></button>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <hr class="mb-5">
+
+            <section class="text-center">
+
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-lg-4 col-md-12 mb-3">
+
+                        <div class="view overlay z-depth-1-half" style="display: block; width: 100%; max-width: 100%; height: auto;">
+                            <img src="~/Style/img/background1.jpg" class="img-fluid" alt="">
+                            <a>
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <div class="view overlay z-depth-1-half" style="display: block; width: 100%; max-width: 100%; height: auto;">
+                            <img src="~/Style/img/background2.jpg" class="img-fluid" alt="">
+                            <a>
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-lg-4 col-md-6 mb-3">
+
+                        <div class="view overlay z-depth-1-half" style="display: block; width: 100%; max-width: 100%; height: auto;">
+                            <img src="~/Style/img/background3.jpg" class="img-fluid" alt="">
+                            <a>
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-6 mb-3">
+
+                        <div class="view overlay z-depth-1-half" style="display: block; width: 100%; max-width: 100%; height: auto;">
+                            <img src="~/Style/img/background4.jpg" class="img-fluid" alt="">
+                            <a>
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+                    <!-- Grid column -->
+                    <div class="col-md-6 mb-3">
+
+                        <div class="view overlay z-depth-1-half" style="display: block; width: 100%; max-width: 100%; height: auto;    transform: scale(-1, 1);">
+                            <img src="~/Style/img/background4.jpg" class="img-fluid" alt="">
+                            <a>
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+                <!-- Grid row -->
+                <div class="row">
+
+                    <!-- Grid column -->
+                    <div class="col-md-12 mb-3">
+
+                        <div class="view overlay z-depth-1-half" style="display: block; width: 100%; max-width: 100%; height: auto;">
+                            <img src="~/Style/img/background5.jpg" class="img-fluid" alt="">
+                            <a>
+                                <div class="mask rgba-white-light"></div>
+                            </a>
+                        </div>
+
+                    </div>
+                    <!-- Grid column -->
+
+                </div>
+                <!-- Grid row -->
+
+
+            </section>
+
+            <hr class="mb-5">
+
+            <section>
+                <h2 class="my-5 h3 text-center">... more</h2>
+                <div class="row features-small mt-5 wow fadeIn">
+                    <div class="col-xl-3 col-lg-6">
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fab fa-firefox fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2 pl-3">
+                                <h5 class="feature-title font-bold mb-1">Cross-browser compatibility</h5>
+                                <p class="grey-text mt-2">
+                                    Chrome, Firefox, IE, Safari, Opera, Microsoft Edge - MDB loves all browsers;
+                                    all browsers love MDB.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-level-up-alt fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">Frequent updates</h5>
+                                <p class="grey-text mt-2">
+                                    MDB becomes better every month. We love the project and enhance as much as
+                                    possible.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-comments fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">Active community</h5>
+                                <p class="grey-text mt-2">
+                                    Our society grows day by day. Visit our forum and check how it is to be a
+                                    part of our family.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-code fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">React</h5>
+                                <p class="grey-text mt-2">
+                                    MDB is integrated with ReactJS. Therefore you can use all the latest
+                                    features which come along with
+                                    it.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+
+                </div>
+                <!--/First row-->
+                <!--Second row-->
+                <div class="row features-small mt-4 wow fadeIn">
+
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-cubes fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">Modularity</h5>
+                                <p class="grey-text mt-2">
+                                    Material Design for Bootstrap comes with both, compiled, ready to use
+                                    libraries including all features as
+                                    well as modules for CSS (SASS files) and JS.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-question fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">Technical support</h5>
+                                <p class="grey-text mt-2">
+                                    We care about reliability. If you have any questions - do not hesitate to
+                                    contact us.
+                                </p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="fas fa-th fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">Flexbox</h5>
+                                <p class="grey-text mt-2">MDB fully supports Flex Box. You can forget about alignment issues.</p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+                    <!--Grid column-->
+                    <div class="col-xl-3 col-lg-6">
+                        <!--Grid row-->
+                        <div class="row">
+                            <div class="col-2">
+                                <i class="far fa-file-code fa-2x mb-1 indigo-text" aria-hidden="true"></i>
+                            </div>
+                            <div class="col-10 mb-2">
+                                <h5 class="feature-title font-bold mb-1">SASS files</h5>
+                                <p class="grey-text mt-2">Arranged and well documented .scss files can't wait until you compile them.</p>
+                            </div>
+                        </div>
+                        <!--/Grid row-->
+                    </div>
+                    <!--/Grid column-->
+
+                </div>
+                <!--/Second row-->
+
+            </section>
+            <!--Section: More-->
+
+        </div>
+    </main>
+    <!--Main layout-->
+    <!--Footer-->
+    <footer class="page-footer text-center font-small mt-4 wow fadeIn">
+
+        <div class="pt-4">
+            <p>@Resources.Resource.DescriptionText</p>
+        </div>
+
+        <hr class="my-4">
+
+        <!--Call to action-->
+        <div class="pt-4" style="padding-top: 0px!important">
+            <a class="btn btn-outline-white" href="mailto:yakubovich_e@inbox.ru" target="_blank" role="button">
+                Email us <i class="fa fa-envelope ml-2"></i>
+            </a>
+        </div>
+        <!--/.Call to action-->
+
+        <hr class="my-4">
+
+        <!-- Social icons -->
+        <div class="pb-4">
+            <a href="" target="_blank">
+                <i class="fab fa-facebook-f mr-3"></i>
+            </a>
+
+            <a href="" target="_blank">
+                <i class="fab fa-twitter mr-3"></i>
+            </a>
+        </div>
+        <!-- Social icons -->
+        <!--Copyright-->
+        <div class="footer-copyright py-3">
+            <p class="ftex">&copy; 2022 All Rights Reserved</p>
+        </div>
+        <!--/.Copyright-->
+
+    </footer>
+
+    <div class="modal fade" id="MyNotifications" tabindex="-1" role="dialog" aria-hidden="true" style="height: 400px;">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <h2 class="modal-title" style="text-align:center;padding-top: 15px;padding-bottom: 15px;border-bottom: 1px solid rgba(0,0,0,.1);">@Resources.Resource.Notifications</h2>
+                <div class="modal-body">
+                    @if (count > 0)
+                    {
+                        foreach (var n in notifications.List)
+                        {
+                            @Html.Partial("NotificationPartialView", n);
+                        }
+                    }
+                    else
+                    {
+                        <h4 style="text-align:center">@Resources.Resource.NoNotifications</h4>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="~/Style/js/jquery.magnific-popup.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/popper.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/mdb.min.js"></script>
+    <script type="text/javascript" src="~/Style/js/scripts.js"></script>
+    <script type="text/javascript">
+        new WOW().init();
+    </script>
+</body>
+
+</html>
+
+<script>
+    window.onload = function () {
+        $.urlParam = function (name) {
+            var results = new RegExp('[\?&]' + name + '=([^&#]*)')
+                .exec(window.location.search);
+
+            return (results !== null) ? results[1] || 0 : false;
+        }
+        if ($.urlParam('backToList').toString() == "true") {
+            setTimeout(function () {
+                console.log($.urlParam('backToList'));
+                ScrollIndex();
+            }, 500);
+        }
+    }
+
+    autocomplete(document.getElementById("FromInput"), airports);
+    autocomplete(document.getElementById("ToInput"), airports);
+</script>
