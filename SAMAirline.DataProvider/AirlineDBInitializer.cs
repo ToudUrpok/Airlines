@@ -203,7 +203,6 @@ namespace SAMAirline.DataProvider
 
             IList<User> defaultUsers = new List<User>();
             defaultUsers.Add(new User() { ProfileImage = null, Name = "admin", Surname = "admin", Email = "admin@admin.com", Password = Crypto.Sha256("admin" + "admin@admin.com"), Role = Constants.AdminRole, IsConfirmed = true });
-            defaultUsers.Add(new User() { ProfileImage = null, Name = "Maxim", Surname = "Grechuha", Email = "max.grechuha@mail.ru", Password = Crypto.Sha256("123456" + "max.grechuha@mail.ru"), Role = Constants.UserRole, IsConfirmed = true });
             context.Users.AddRange(defaultUsers);
 
             context.SaveChanges();

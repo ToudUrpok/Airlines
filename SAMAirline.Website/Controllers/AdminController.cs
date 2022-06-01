@@ -166,7 +166,7 @@ namespace SAMAirline.Website.Controllers
                             for (int i = 0; i < 10; i++)
                             {
                                 int[] minutes = { 0, 15, 30, 45 };
-                                int month = random.Next(5, 8);
+                                int month = random.Next(DateTime.Now.Month, 12);
                                 int depDay = random.Next(1, 29);
                                 int tempPrice = random.Next(flightTime * 800 / 5 - 100, flightTime * 800 / 5 + 100);
                                 int price = tempPrice - tempPrice % 10;
@@ -188,10 +188,10 @@ namespace SAMAirline.Website.Controllers
                                     new Flight(
                                         ++flightCounter,
                                         $"{airline.AirlineCodeIATA}-{sourceAirport.AirportCodeIATA}-{destAirport.AirportCodeIATA}",
-                                        airline.AirlineCodeIATA, airline.AirlineId, new DateTime(2020, month, depDay, depHour, minutes[depMinute], 00),
+                                        airline.AirlineCodeIATA, airline.AirlineId, new DateTime(DateTime.Now.Year, month, depDay, depHour, minutes[depMinute], 00),
                                         sourceAirport.AirportId, sourceAirport.AirportCodeIATA,
                                         aircraft.AircraftCodeIATA, aircraft.AircraftId, aircraft.TotalPlaces,
-                                        new DateTime(2020, month, arrDay, arrHour, minutes[arrMinute], 00),
+                                        new DateTime(DateTime.Now.Year, month, arrDay, arrHour, minutes[arrMinute], 00),
                                         destAirport.AirportId, destAirport.AirportCodeIATA, Convert.ToInt32(flight.stops), price));
                             }
                         }

@@ -219,9 +219,9 @@
     <Content Include="Data\aircrafts.json" />
     <Content Include="Data\airlines.json" />
     <Content Include="Data\airports.json" />
-    <Content Include="Data\flights.json" />
     <Content Include="Data\flights2.json" />
     <Content Include="Data\flights3.json" />
+    <Content Include="Data\flights.json" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Properties\PublishProfiles\SAMAirline - Web Deploy.pubxml" />
     <Content Include="Style\css\addons\datatables-select.css" />

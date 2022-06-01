@@ -75,7 +75,7 @@ namespace SAMAirline.Logic.Services
             };
             using (var client = new SmtpClient())
             {
-                await client.ConnectAsync("mailbe05.hoster.by", 587, false);
+                await client.ConnectAsync("smtp.gmail.com", 587, false);
                 await client.AuthenticateAsync(ConfigurationManager.AppSettings["AdminEmailAdress"].ToString(), ConfigurationManager.AppSettings["AdminEmailPassword"].ToString());
                 await client.SendAsync(emailMessage);
 

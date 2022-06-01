@@ -6,7 +6,7 @@ namespace SAMAirline.DataProvider
     public partial class AirlineDB : DbContext
     {
         public AirlineDB()
-            : base("name=Airline")
+            : base(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=Airline1;Integrated Security=True;MultipleActiveResultSets=True")
         {
             Database.SetInitializer(new AirlineDBInitializer());
         }
